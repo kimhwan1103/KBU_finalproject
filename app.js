@@ -12,7 +12,6 @@ const nunjucks = require('nunjucks');
 const {sequelize} = require('./models');
 
 
-const indexRouter = require('./routes');
 const memberRouter = require('./routes/member');
 
 
@@ -54,21 +53,22 @@ app.use(
 );
 
 
-app.use('/users', indexRouter);
 app.use('/member', memberRouter);
 
 app.use((req, res, next) => {
     res.locals.title = require('./package.json').name;
     res.locals.port = app.get('port');
+    res.locals.isAuthenticated = req.isAuthenticated(); //로그인이 되었는지 안됬는지
     res.render('main');
-})
+});
+  
 
 app.use((req, res, next) => {
     console.log('404');
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
     error.status = 404;
     next(error);
-})
+});
 
 
 app.use((err, req, res, next) => { //에러 처리 미들웨어(매개변수 반드시 4개), 가장 아래에 위치
