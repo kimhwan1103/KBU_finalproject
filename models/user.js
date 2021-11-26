@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const { associate } = require('./pet');
 
 module.exports = class User extends Sequelize.Model {
     static init(sequelize){
@@ -32,5 +33,10 @@ module.exports = class User extends Sequelize.Model {
             collate: 'utf8mb4_general_ci'
         });
     }
+    static associate(db){
+        db.User.hasMany(db.Pet, {foreignKey: 'userId', sourceKey: 'id', onDelete: 'cascade'})
+    }
 };
+
+
 

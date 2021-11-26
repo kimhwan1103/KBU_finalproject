@@ -58,15 +58,27 @@ router.route('/login')
     })
     .post( (req, res, next) => {
         console.log(req.body);
+
         passport.authenticate('local', (authError, user, info) => {
             if (user) {
                 req.login(user, loginError => res.redirect('/'));
                 res.locals.isAuthenticated = isLoggedIn;
-                console.log('세션: ' + req.session);
             }
             else res.send("로그인 실패");
         })(req, res, next);
     });
+
+//로그아웃
+router.get('/logout', (req, res, next) => {  
+    try{
+        req.logout();
+        req.session.destroy();
+        res.redirect('/');
+    }catch(err){
+        console.log(err);
+        next(err);
+    }
+})
 
 
 // 마이페이지
@@ -100,20 +112,6 @@ router.route('/mypage')
             next(err);
         }
     });
-
-
-
-//로그아웃
-router.get('/logout', (req, res, next) => {  
-    try{
-        req.logout();
-        req.session.destroy();
-        res.redirect('/');
-    }catch(err){
-        console.log(err);
-        next(err);
-    }
-})
 
 
 module.exports = router;

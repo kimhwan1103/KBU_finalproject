@@ -9,32 +9,37 @@
 
 <body>
     {% include "nav.html" %}
-
     <form name="signUp" action="/member/mypage" method="POST">
         <table boder=""  cellspacing="1">
             <tr>
                 <td text-align="center"><br>ID<br><br></td>
                 <td>
-                    <input type="text" size="auto" name="id" placeholder={{user.id}} required />
+                    <input type="text" size="auto" name="id" value={{user.id}} required />
                 </td>
             </tr>
             <tr>
                 <td><br> Password <br><br></td>
-                <td> <input type="password" name="password" placeholder="*********" required /> </td>
+                <td> <input type="password" name="password" value="*********" required /> </td>
             </tr>
             <tr>
                 <td><br> Name <br><br></td>
-                <td> <input type="text" name="name" placeholder={{user.name}} required /> </td>
+                <td> <input type="text" name="name" value ={{user.name}} required /></td>
             </tr>
             <tr>
                 <td><br> address <br><br></td>
-                <td> <input type="text" name="address" placeholder={{user.address}} required /> </td>
+                <td> 
+                    <input type="text" name="address" value ="{{user.address}}" required />
+                </td>
             </tr>
             
         </table>
         
-        <input type="submit" class="login" value="submit" id="sign">
+        <input type="submit" class="login" value="수정하기" id="sign">
         <input type="reset" class="reset" value="reset" id="sign" />
     </form>
 </body>
+<script>
+    
+</script>
+
 </html>

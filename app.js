@@ -11,7 +11,7 @@ const path = require('path');
 const nunjucks = require('nunjucks');
 const {sequelize} = require('./models');
 
-
+const petRouter = require('./routes/pet');
 const memberRouter = require('./routes/member');
 
 
@@ -52,7 +52,7 @@ app.use(
     passport.session()
 );
 
-
+app.use('/pet', petRouter);
 app.use('/member', memberRouter);
 
 app.use((req, res, next) => {
