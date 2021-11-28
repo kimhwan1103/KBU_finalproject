@@ -14,6 +14,7 @@ const {sequelize} = require('./models');
 
 const indexRouter = require('./routes');
 const memberRouter = require('./routes/member');
+const mapRouter = require('./routes/map');
 
 
 dotenv.config();
@@ -56,8 +57,9 @@ app.use(
 
 app.use('/users', indexRouter);
 app.use('/member', memberRouter);
+app.use('/map', mapRouter);
 
-app.use((req, res, next) => {
+app.use((req, res, next) => { 
     res.locals.title = require('./package.json').name;
     res.locals.port = app.get('port');
     res.render('main');
