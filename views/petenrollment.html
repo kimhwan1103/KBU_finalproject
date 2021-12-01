@@ -9,7 +9,8 @@
 
 <body>
     {% include "nav.html" %}
-    <form name="signUp" action="/member/login" method="POST">
+
+    <form name="signUp" action="/member/join" method="POST">
         <table boder=""  cellspacing="1">
             <tr>
                 <td text-align="center"><br>ID <br><br></td>
@@ -19,13 +20,21 @@
             </tr>
             <tr>
                 <td><br> Password <br><br></td>
-                <td><input type="password" name="password" required /></td>
+                <td> <input type="password" name="password" required /> </td>
             </tr>
+            <tr>
+                <td><br> Name <br><br></td>
+                <td> <input type="text" name="name" required /> </td>
+            </tr>
+            <tr>
+                <td><br> address <br><br></td>
+                <td> <input type="text" name="address" required /> </td>
+            </tr>
+            
         </table>
         
         <input type="submit" class="login" value="submit" id="sign">
         <input type="reset" class="reset" value="reset" id="sign" />
     </form>
 </body>
-
 </html>
