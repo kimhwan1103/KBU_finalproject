@@ -10,14 +10,16 @@
     {% include "nav.html" %}
     <div id="map" style="width:350px;height:350px;"></div>
 
+    <!--카카오api에서 자동으로 지역까지 이동시키기때문에 삭제할 예정-->
     <form id="form" action="/map" method="GET">
-        <input type="text" name="address" placeholder="주소" /><br>
+        <input type="text" name="address" placeholder="주소" /><br> 
         <button type="submit">주소 설정</button>
     </form>
+
     <div>
-        <label><input type="radio" name="UserSearch" value="동물병원" checked>동물병원</label>
-        <label><input type="radio" name="UserSearch" value="동물호텔">동물호텔</label>
-    </div>
+        <label><input type="radio" name="UserSearch" value="동물병원">동물병원</label>
+        <label><input type="radio" name="UserSearch" value="애견호텔">애견호텔</label> <!--카카오지도에서 동물호텔이라고 검색하면 안나오기 때문에 애견호텔로 변경-->
+    </div> 
     <button onclick="panTo()">이동하기</button>
 </body>
 
@@ -25,7 +27,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
 
-var checkedRaido = "동물병원";
+var checkedRaido = "";
 
 console.log(checkedRaido);
 
@@ -34,10 +36,14 @@ var Y = 0;
 
 var moveLatLon;
 
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+var markers = [];
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 6 // 지도의 확대 레벨
     };
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -49,18 +55,34 @@ var ps = new kakao.maps.services.Places();
 //카카오에서 제공해주는 함수 
 function panTo(){
     
-    moveLatLon = new kakao.maps.LatLng(Y, X);
+    //moveLatLon = new kakao.maps.LatLng(Y, X);
 
-    map.panTo(moveLatLon);
-    checkedRaido = $("input:radio[name=UserSearch]:checked").val();
+    //map.panTo(moveLatLon);
+    //checkedRaido = $("input:radio[name=UserSearch]:checked").val();
+    checkedRaido = $("input[name=UserSearch]:checked").val();
 
+    console.log(checkedRaido);
     console.log(`카카오맵 x좌표: ${X} y좌표: ${Y}`);
 
-    displayMarker(moveLatLon);
+    if(markers === null){
+        ps.keywordSearch('노원' + checkedRaido, placesSearchCB), {
+        location: center,
+        sort: kakao.maps.services.SortBy.DISTANCE
+        };
+    }else{
+        for(var i=0; i<markers.length; i++){
+            markers[i].setMap(null);
+        }
+        
+        ps.keywordSearch('노원' + checkedRaido, placesSearchCB), {
+        location: center,
+        sort: kakao.maps.services.SortBy.DISTANCE
+        };
+    }
 }
 
+var center = map.getCenter();
 
-ps.keywordSearch(checkedRaido, placesSearchCB);
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {
@@ -87,16 +109,17 @@ function displayMarker(place) {
     var marker = new kakao.maps.Marker({
         map: map,
         //position: new kakao.maps.LatLng(place.y, place.x) 
-        position: moveLatLon
+        position: new kakao.maps.LatLng(place.y, place.x)
     });
 
+    markers.push(marker);
+
     // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, 'click', function() {
+    kakao.maps.event.addListener(marker, 'click', () => {
         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
         infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
         infowindow.open(map, marker);
 
-        map.setContent(moveLatLon);
     });
 }
 
