@@ -1,7 +1,6 @@
 const express = require('express');
 
 const User = require('../models/user');
-const auth = require('../routes/checklogin');
 const { isLoggedIn, isNotLoggedIn } = require('./checklogin');
 
 const bcrypt = require('bcrypt');
@@ -98,7 +97,6 @@ router.route('/mypage')
         try {
             const hash = await bcrypt.hash(req.body.password, 12);
             const result = await User.update({
-                id: req.body.id,
                 password: hash,
                 name: req.body.name,
                 address: req.body.address

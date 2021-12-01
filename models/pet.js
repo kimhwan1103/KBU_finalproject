@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+const { associate } = require('./user');
+
 
 module.exports = class Pet extends Sequelize.Model {
   static init(sequelize) {
@@ -18,7 +20,11 @@ module.exports = class Pet extends Sequelize.Model {
         petWeight: {
             type: Sequelize.FLOAT,
             allowNull: false
-        }
+        },
+        img: {
+          type: Sequelize.STRING(200),
+          allowNull: true,
+        },
     }, {
       sequelize,
       timestamps: false,

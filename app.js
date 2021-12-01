@@ -8,9 +8,15 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const passportConfig= require('./passport');
 const path = require('path');
+const multer = require('multer');
 const nunjucks = require('nunjucks');
+
 const {sequelize} = require('./models');
 
+
+const petMedicineRouter = require('./routes/petMedicine');
+const petWalkRouter = require('./routes/petWalk');
+const petHealthInfoRouter = require('./routes/petHealthInfo');
 const petRouter = require('./routes/pet');
 const memberRouter = require('./routes/member');
 
@@ -52,8 +58,12 @@ app.use(
     passport.session()
 );
 
+app.use('/petmedicine', petMedicineRouter);
+app.use('/petwalk', petWalkRouter);
+app.use('/pethealth', petHealthInfoRouter);
 app.use('/pet', petRouter);
 app.use('/member', memberRouter);
+
 
 app.use((req, res, next) => {
     res.locals.title = require('./package.json').name;
@@ -61,7 +71,7 @@ app.use((req, res, next) => {
     res.locals.isAuthenticated = req.isAuthenticated(); //로그인이 되었는지 안됬는지
     res.render('main');
 });
-  
+
 
 app.use((req, res, next) => {
     console.log('404');

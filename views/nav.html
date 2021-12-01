@@ -15,21 +15,24 @@
             <a class="nav-link active" aria-current="page" href="http://localhost:5000">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="http://localhost:5000/pet/enrollment">MY PET</a>
+            <a class="nav-link active" aria-current="page" href="http://localhost:5000/pet/enrollment">PET enrollment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:5000/pethealth">MY PET</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="http://localhost:5000/map">MAP</a>
           </li>
           {% if isAuthenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:5000/member/mypage" style="padding-left: 25.4cm;">마이페이지</a>
+            <a class="nav-link" href="http://localhost:5000/member/mypage" style="padding-left: 22cm;">마이페이지</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="http://localhost:5000/member/logout">로그아웃</a>
           </li>
           {% else %}
           <li class="nav-item">            
-            <a class="nav-link" href="http://localhost:5000/member/login" style="padding-left: 26.3cm;">로그인</a>
+            <a class="nav-link" href="http://localhost:5000/member/login" style="padding-left: 23cm;">로그인</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="http://localhost:5000/member/join">회원가입</a>
