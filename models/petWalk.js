@@ -1,32 +1,29 @@
-// const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
+const { associate } = require('./pet');
 
-// module.exports = class PetWalk extends Sequelize.Model {
-//     static init(sequelize) {
-//       return super.init({
-//           petKind: {
-//               type: Sequelize.STRING(10),
-//               allowNull: false,
-//           },
-//           petName: {
-//               type: Sequelize.STRING(20),
-//               allowNull: false
-//           },
-//           petAge: {
-//               type: Sequelize.INTEGER,
-//               allowNull: false
-//           },
-//           petWeight: {
-//               type: Sequelize.FLOAT,
-//               allowNull: false
-//           }
-//       }, {
-//         sequelize,
-//         timestamps: false,
-//         modelName: 'PetWalk',
-//         tableName: 'petwalk',
-//         paranoid: false,
-//         charset: 'utf8mb4',
-//         collate: 'utf8mb4_general_ci',
-//       });
-//     }
+module.exports = class PetWalk extends Sequelize.Model {
+    static init(sequelize) {
+        return super.init({
+            whetherToWork: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+            },
+            walkDate: {
+                type: Sequelize.DATE,
+                allowNull: false
+            }
+        }, {
+        sequelize,
+        timestamps: false,
+        modelName: 'PetWalk',
+        tableName: 'petwalk',
+        paranoid: false,
+        charset: 'utf8mb4',
+        collate: 'utf8mb4_general_ci',
+        });
+    }
 
+    static associate(db) {
+        db.PetWalk.belongsTo(db.Pet, { foreignKey: 'petId', targetKey: 'id' });
+    }
+};
