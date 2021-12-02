@@ -1,50 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Project</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title> Project </title>
+  <script src="https://use.fontawesome.com/138e2b8a10.js">
+  </script>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="http://localhost:5000">I LOVE PET</a>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="http://localhost:5000">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="http://localhost:5000/pet/enrollment">PET enrollment</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="http://localhost:5000/pethealth">MY PET</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="http://localhost:5000/map">MAP</a>
-          </li>
-          {% if isAuthenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:5000/member/mypage" style="padding-left: 22cm;">마이페이지</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:5000/member/logout">로그아웃</a>
-          </li>
-          {% else %}
-          <li class="nav-item">            
-            <a class="nav-link" href="http://localhost:5000/member/login" style="padding-left: 23cm;">로그인</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:5000/member/join">회원가입</a>
-          {% endif %}
-          </li>
-        </ul>
-        <span class="navbar-text">
-        </span>
-      </div>
+  <nav class="navbar" style="color: black;">
+    <div class="navbar_logo">
+      <h3>
+        <i class="fa fa-paw" aria-hidden="true"></i>
+        <a href="http://localhost:5000">I LOVE PET</a>
+      </h3>
     </div>
+
+    <ul class="navbar_menu">
+      <li><a href="http://localhost:5000">Home</a></li>
+      <li><a href="http://localhost:5000/pet/enrollment">PET enrollment</a></li>
+      <li><a href="http://localhost:5000/pethealth">MY PET</a></li>
+      <li><a href="http://localhost:5000/map">MAP</a></li>
+    </ul>
+
+    <ul class="nav_sign">
+      {% if isAuthenticated %}
+      <li><a href="http://localhost:5000/member/mypage">마이페이지</a></li>
+      <li><a href="http://localhost:5000/member/logout">로그아웃</a></li>
+      {% else %}
+      <li><a href="http://localhost:5000/member/login">로그인</a></li>
+      <li><a href="http://localhost:5000/member/join">회원가입</a></li>
+      {% endif %}
+    </ul>
+
   </nav>
 </body>
-
 
 </html>
