@@ -8,11 +8,9 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const passportConfig= require('./passport');
 const path = require('path');
-const multer = require('multer');
 const nunjucks = require('nunjucks');
 
 const {sequelize} = require('./models');
-
 
 const petMedicineRouter = require('./routes/petMedicine');
 const petWalkRouter = require('./routes/petWalk');
@@ -57,6 +55,7 @@ app.use(
     passport.initialize(),
     passport.session()
 );
+
 
 app.use('/petmedicine', petMedicineRouter);
 app.use('/petwalk', petWalkRouter);
