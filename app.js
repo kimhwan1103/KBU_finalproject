@@ -9,9 +9,7 @@ const passport = require('passport');
 const passportConfig= require('./passport');
 const path = require('path');
 const nunjucks = require('nunjucks');
-
 const {sequelize} = require('./models');
-
 const petMedicineRouter = require('./routes/petMedicine');
 const petWalkRouter = require('./routes/petWalk');
 const petHealthInfoRouter = require('./routes/petHealthInfo');
