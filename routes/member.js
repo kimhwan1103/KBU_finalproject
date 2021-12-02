@@ -1,7 +1,6 @@
 const express = require('express');
 
 const User = require('../models/user');
-const auth = require('../routes/checklogin');
 const { isLoggedIn, isNotLoggedIn } = require('./checklogin');
 
 const bcrypt = require('bcrypt');
@@ -58,15 +57,27 @@ router.route('/login')
     })
     .post( (req, res, next) => {
         console.log(req.body);
+
         passport.authenticate('local', (authError, user, info) => {
             if (user) {
                 req.login(user, loginError => res.redirect('/'));
                 res.locals.isAuthenticated = isLoggedIn;
-                console.log('세션: ' + req.session);
             }
             else res.send("로그인 실패");
         })(req, res, next);
     });
+
+//로그아웃
+router.get('/logout', (req, res, next) => {  
+    try{
+        req.logout();
+        req.session.destroy();
+        res.redirect('/');
+    }catch(err){
+        console.log(err);
+        next(err);
+    }
+})
 
 
 // 마이페이지
@@ -86,7 +97,6 @@ router.route('/mypage')
         try {
             const hash = await bcrypt.hash(req.body.password, 12);
             const result = await User.update({
-                id: req.body.id,
                 password: hash,
                 name: req.body.name,
                 address: req.body.address
@@ -100,20 +110,6 @@ router.route('/mypage')
             next(err);
         }
     });
-
-
-
-//로그아웃
-router.get('/logout', (req, res, next) => {  
-    try{
-        req.logout();
-        req.session.destroy();
-        res.redirect('/');
-    }catch(err){
-        console.log(err);
-        next(err);
-    }
-})
 
 
 module.exports = router;

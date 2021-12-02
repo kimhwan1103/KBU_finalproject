@@ -7,34 +7,84 @@
     <title>Project</title>
 </head>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script>
+    $(function() {
+        $("#photoInput").on('change', function() {
+            readURL(this);
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#photoOutput').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
 <body>
     {% include "nav.html" %}
 
-    <form name="signUp" action="/member/join" method="POST">
-        <table boder=""  cellspacing="1">
+    <form name="signUp" action="/pet/enrollment" method="POST" >
+        <table boder=""  cellspacing="1" >
             <tr>
-                <td text-align="center"><br>ID <br><br></td>
+                <td><label>파일</label></td>
+                <td><input type="file" name="photo" id="photoInput" /></td>
+            </tr>
+            <tr>
+                <td><label>사진</label></td>
+                <td><img src="" id="photoOutput" width="200px"></td>
+            </tr>
+            <tr>
+                <td text-align="center"><br> 이름 <br><br></td>
                 <td>
-                    <input type="text" size="auto" name="id" required />
+                    <input type="text" size="auto" name="petName" required />
                 </td>
             </tr>
             <tr>
-                <td><br> Password <br><br></td>
-                <td> <input type="password" name="password" required /> </td>
+                <td text-align="center"><br> 종류 <br><br></td>
+                <td>
+                    <select class="form-select" aria-label="Default select example" name="petKind">
+                        <option value="강아지">강아지</option>
+                        <option value="고양이">고양이</option>
+                        <option value="기타(조류, 파충류...)">기타(조류, 파충류...)</option>
+                    </select>
+                </td>
             </tr>
             <tr>
-                <td><br> Name <br><br></td>
-                <td> <input type="text" name="name" required /> </td>
+                <td><br> 나이 <br><br></td>
+                <td>
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="90" value="1" class="slider" id="myRange" name="petAge" required />
+                        <span id="value">0</span>
+                    </div>
+                    <!-- <input type="range" class="form-range" id="range" min="0" max="80">
+                    <span id="result" class="form-range">0</span> -->
+                </td>
             </tr>
             <tr>
-                <td><br> address <br><br></td>
-                <td> <input type="text" name="address" required /> </td>
+                <td><br> 몸무게 <br><br></td>
+                <td> <input type="text" name="petWeight" style="margin-right:1ch" required />kg </td>
             </tr>
-            
-        </table>
-        
+        </table>      
         <input type="submit" class="login" value="submit" id="sign">
-        <input type="reset" class="reset" value="reset" id="sign" />
     </form>
+
+
+    <script>
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("value");
+        output.innerHTML = slider.value;
+
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+        }
+    </script>
 </body>
 </html>
