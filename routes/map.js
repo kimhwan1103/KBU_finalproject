@@ -2,14 +2,12 @@ const express = require('express');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const nunjucks = require('nunjucks');
+const { isLoggedIn } = require('./checklogin');
 
-dotenv.config();
 
 const router = express.Router();
 
 var locationJson = {}
-
-
 
 router.use(
     express.json()
@@ -17,6 +15,7 @@ router.use(
 
 router.route('/')
     .get((req, res, next) => {
+        res.locals.user= req.user;
         var address = req.query.address; //html에서 주소값 불러오기 
         var result = "";
         console.log(`사용자가 입력한 주소 ${address}`); //주소값 출력 
@@ -49,4 +48,6 @@ router.route('/xy')
         console.log(`전송할 json파일 ${locationJson}`); //josn값 출력 
         res.send(locationJson); //json값 전송 
     })
+
+
 module.exports = router

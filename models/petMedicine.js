@@ -14,7 +14,8 @@ module.exports = class PetMedicine extends Sequelize.Model {
             }
         }, {
             sequelize,
-            timestamps: false,                modelName: 'PetMedicine',
+            modelName: 'PetMedicine',
+            timestamps: false,                
             tableName: 'petmedicine',
             paranoid: false,
             charset: 'utf8mb4',
