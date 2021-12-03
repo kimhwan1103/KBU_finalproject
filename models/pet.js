@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 
 
+
 module.exports = class Pet extends Sequelize.Model {
   static init(sequelize) {
     return super.init({

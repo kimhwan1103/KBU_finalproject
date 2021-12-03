@@ -49,4 +49,6 @@ router.route('/xy')
         console.log(`전송할 json파일 ${locationJson}`); //josn값 출력 
         res.send(locationJson); //json값 전송 
     })
+
+
 module.exports = router
