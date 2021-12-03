@@ -38,7 +38,15 @@ module.exports = class Pet extends Sequelize.Model {
 
   static associate(db) {
     db.Pet.belongsTo(db.User, { foreignKey: 'userId', targetKey: 'id' });
-    // db.Pet.hasMany(db.PetWalk, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'})
-    // db.Pet.hasMany(db.PetMedicine, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'})
+    db.Pet.hasMany(db.PetWalk, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'});
+    db.Pet.hasMany(db.PetMedicine, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'});
   }
+
+  // static associate1(db){
+  //   db.Pet.hasMany(db.PetWalk, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'});
+  // }
+
+  // static assoicate2(db){
+  //   db.Pet.hasMany(db.PetMedicine, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'});
+  // }
 };

@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+
 const dotenv = require('dotenv');
 const passport = require('passport');
 const passportConfig= require('./passport');
@@ -10,12 +11,13 @@ const path = require('path');
 const nunjucks = require('nunjucks');
 const {sequelize} = require('./models');
 
+const mapRouter = require('./routes/map');
 const petMedicineRouter = require('./routes/petMedicine');
 const petWalkRouter = require('./routes/petWalk');
 const petHealthInfoRouter = require('./routes/petHealthInfo');
 const petRouter = require('./routes/pet');
 const memberRouter = require('./routes/member');
-const mapRouter = require('./routes/map');
+
 
 dotenv.config();
 passportConfig();
