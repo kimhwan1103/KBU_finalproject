@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="ko">
 
 <head>
     <title>Project</title>
@@ -10,25 +9,22 @@
 <body>
     {% include "nav.html" %}
 
-    <form action="/petmedicine", method="POST">
+    <form action="/petmedicine/{{petId}}" name="checkDate" method="POST">
         <table boder=""  cellspacing="1">
             <tr>
-                <input type="date" id="date" onclick="know()">
+                <input type="date" id="date" name="setDate" min = {{min}} required/>
             </tr>
             <tr>
                 <td><br> 약물명 <br><br></td>
-                <td><input type="password" name="medicine" placeholder="반려동물 의약품명 입력" onfocus="this.placeholder=''" onblur="this.placeholder='반려동물 의약품명 입력'"
+                <td><input type="text" name="medicineName" placeholder=",로 중복 입력가능" onfocus="this.placeholder=''" onblur="this.placeholder='반려동물 의약품명 입력'" required/>
             </tr>
-    </table>
+        </table>
+        <input type="submit" class="login" value="기록하기" id="sign" name="auth" onsubmit="return setting()">
     </form>
-
-
 </body>
 
 <script>
-    function know(){
-        console.log(document.querySelector("#date").value);
-    }
-
+    document.getElementById('date').value = new Date().toISOString().substring(0, 10);
+    console.log(document.querySelector("#date").value);
 </script>
 </html>

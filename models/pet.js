@@ -21,10 +21,6 @@ module.exports = class Pet extends Sequelize.Model {
             type: Sequelize.FLOAT,
             allowNull: false
         },
-        img: {
-          type: Sequelize.STRING(200),
-          allowNull: true,
-        },
     }, {
       sequelize,
       timestamps: false,
@@ -41,12 +37,4 @@ module.exports = class Pet extends Sequelize.Model {
     db.Pet.hasMany(db.PetWalk, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'});
     db.Pet.hasMany(db.PetMedicine, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'});
   }
-
-  // static associate1(db){
-  //   db.Pet.hasMany(db.PetWalk, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'});
-  // }
-
-  // static assoicate2(db){
-  //   db.Pet.hasMany(db.PetMedicine, {foreignKey: 'petId', sourceKey: 'id', onDelete: 'cascade'});
-  // }
 };

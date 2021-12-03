@@ -9,13 +9,13 @@ module.exports = class PetMedicine extends Sequelize.Model {
                 allowNull: false,
             },
             medicineDate: {
-                type: Sequelize.DATE,
+                type: Sequelize.STRING(20),
                 allowNull: false,
             }
         }, {
             sequelize,
-            modelName: 'PetMedicine',
-            timestamps: false,                
+            timestamps: false, 
+            modelName: 'PetMedicine',               
             tableName: 'petmedicine',
             paranoid: false,
             charset: 'utf8mb4',

@@ -81,11 +81,11 @@ app.use((req, res, next) => {
 });
 
 
-app.use((err, req, res, next) => { //에러 처리 미들웨어(매개변수 반드시 4개), 가장 아래에 위치
-    res.locals.message = err.message;
-    res.locals.error = process.env.NODE_ENV != 'production'? err: {};
-    res.status(err.status || 500);
-    res.render('error');
+app.use((err, req, res, next) => { //에러 미들웨어, 매개변수가 4개!!!, 맨 마지막에 있는 것이 안정적이고 좋음
+    console.error(err);
+    res.status(500).send(err);
 });
 
 app.listen(app.get('port'), () => console.log(app.get('port'), '번 포트에서 대기 중'));
+
+module.exports = app;

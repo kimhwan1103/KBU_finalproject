@@ -13,13 +13,13 @@ module.exports = class PetWalk extends Sequelize.Model {
                 allowNull: false
             }
         }, {
-        sequelize,
-        timestamps: false,
-        modelName: 'PetWalk',
-        tableName: 'petwalk',
-        paranoid: false,
-        charset: 'utf8mb4',
-        collate: 'utf8mb4_general_ci',
+            sequelize,
+            timestamps: false,
+            modelName: 'PetWalk',
+            tableName: 'petwalk',
+            paranoid: false,
+            charset: 'utf8mb4',
+            collate: 'utf8mb4_general_ci',
         });
     }
 

@@ -7,40 +7,11 @@
     <title>Project</title>
 </head>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-<script>
-    $(function() {
-        $("#photoInput").on('change', function() {
-            readURL(this);
-        });
-    });
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('#photoOutput').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
-
 <body>
     {% include "nav.html" %}
 
     <form name="signUp" action="/pet/enrollment" method="POST" >
         <table boder=""  cellspacing="1" >
-            <tr>
-                <td><label>파일</label></td>
-                <td><input type="file" name="photo" id="photoInput" /></td>
-            </tr>
-            <tr>
-                <td><label>사진</label></td>
-                <td><img src="" id="photoOutput" width="200px"></td>
-            </tr>
             <tr>
                 <td text-align="center"><br> 이름 <br><br></td>
                 <td>
