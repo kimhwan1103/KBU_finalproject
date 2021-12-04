@@ -15,6 +15,7 @@ const petWalkRouter = require('./routes/petWalk');
 const petHealthInfoRouter = require('./routes/petHealthInfo');
 const petRouter = require('./routes/pet');
 const memberRouter = require('./routes/member');
+const mapRouter = require('./routes/map');
 
 
 dotenv.config();
@@ -60,6 +61,7 @@ app.use('/petwalk', petWalkRouter);
 app.use('/pethealth', petHealthInfoRouter);
 app.use('/pet', petRouter);
 app.use('/member', memberRouter);
+app.use('/map', mapRouter);
 
 
 app.use((req, res, next) => {
