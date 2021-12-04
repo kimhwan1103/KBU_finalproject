@@ -11,7 +11,6 @@ const path = require('path');
 const nunjucks = require('nunjucks');
 const {sequelize} = require('./models');
 
-const mapRouter = require('./routes/map');
 const petMedicineRouter = require('./routes/petMedicine');
 const petWalkRouter = require('./routes/petWalk');
 const petHealthInfoRouter = require('./routes/petHealthInfo');
@@ -58,7 +57,6 @@ app.use(
 );
 
 
-app.use('/map', mapRouter);
 app.use('/petmedicine', petMedicineRouter);
 app.use('/petwalk', petWalkRouter);
 app.use('/pethealth', petHealthInfoRouter);
